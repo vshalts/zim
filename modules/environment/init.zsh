@@ -37,3 +37,14 @@ unsetopt HUP
 # a second attempt to exit the shell will succeed. 
 # NO_CHECK_JOBS is best used only in combination with NO_HUP, else such jobs will be killed automatically
 unsetopt CHECK_JOBS
+
+# sets the window title and updates upon directory change
+# more work probably needs to be done here to support multiplexers
+if (($+ztermtitle)); then
+  case ${TERM} in
+    xterm*)
+      chpwd() { print -Pn "\e]0;${ztermtitle}\a" }
+      chpwd  # we execute it once to initialize the window title
+      ;;
+  esac
+fi
