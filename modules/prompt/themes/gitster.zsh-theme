@@ -5,7 +5,7 @@
 # Requires the `git-info` zmodule to be included in the .zimrc file.
 
 prompt_gitster_status() {
-  print -n '%(?:%F{green}➜:%F{red}➜) '
+  print -n '%(?:%F{green}:%F{red})➜ '
 }
 
 prompt_gitster_pwd() {
@@ -26,7 +26,7 @@ prompt_gitster_setup() {
   autoload -Uz colors && colors
   autoload -Uz add-zsh-hook
 
-  prompt_opts=(cr percent subst)
+  prompt_opts=(cr percent sp subst)
 
   add-zsh-hook precmd prompt_gitster_precmd
 
@@ -37,7 +37,7 @@ prompt_gitster_setup() {
   zstyle ':zim:git-info:keys' format \
     'prompt' ' %F{cyan}%b%c %C%D'
 
-  PROMPT='$(prompt_gitster_status)$(prompt_gitster_pwd)$(prompt_gitster_git)%f '
+  PROMPT="$(prompt_gitster_status)\$(prompt_gitster_pwd)\$(prompt_gitster_git)%f "
   RPROMPT=''
 }
 
